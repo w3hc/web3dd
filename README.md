@@ -101,4 +101,4 @@ MIT license
 
 ## Support
 
-You can contact us via [discord](https://discord.com/channels/753223385948880961/1060971386149015692)
+You can contact us via [discord](https://discord.com/channels/753223385948880961/1224720192488210584)
