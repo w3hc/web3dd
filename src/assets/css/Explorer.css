@@ -1,0 +1,163 @@
+html,body { height: 100%; margin: 0px; padding: 0px; }
+
+.Explorer {
+  background-color: white;
+  color: black;
+  height: 100%;
+  min-height: 100vh;
+  /*min-height: calc(100vh - 2px);
+  border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+}
+
+.Explorer-header {
+  font-size: calc(10px + 2vmin);
+  padding: 10px 10px;
+  background-color: #0078D7; /*#0078D7 3875ee*/
+  display: flex;
+  flex-direction: row;
+  color: white;
+  white-space: nowrap;
+}
+
+.Explorer-header-userData {
+  font-size: calc(10px + 1vmin);
+  float: right;
+  color: white;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/*
+.Explorer-menu1 {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+*/
+.Explorer-menu {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+/*
+.Explorer-button {
+  text-align: center;
+  white-space: nowrap;
+  flex: auto;
+}
+*/
+.Explorer-menu-button {
+  padding:0px 10px;
+  text-align: center;
+  white-space: nowrap;
+  cursor:pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.Explorer-menu-button:hover {
+  background-color: #dcefff;
+}
+
+.Explorer-menu-button[disabled]:hover {
+  background-color: gainsboro;
+}
+
+.Explorer-menu-icon {
+  margin-right: 5px;
+  height: 16px;
+}
+/*
+.Explorer-textDir {
+  text-align: left;
+  border: 1px solid black;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding:0px 5px;
+}
+*/
+.Explorer-menu-textDir {
+  text-align: left;
+  flex: 1;
+  border: 1px solid gainsboro;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 5px;
+  padding:0px 5px;
+}
+
+.Explorer-view {
+  height: 100%;
+  min-height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding-top: 5px;
+}
+
+.Explorer-tree {
+  /*border: 1px solid blue;*/
+  border-right: 1px solid gainsboro;
+  /*min-width: 25%;*/
+  padding: 10px;
+  flex: 1;
+}
+
+.Explorer-list {
+  /*border: 1px solid greenyellow;*/
+  /*width: 100%;*/
+  padding: 10px;
+  flex: 3;
+}
+
+.Explorer-list-tr:hover {
+  background: #E5F3FF;
+}
+
+/*.Explorer-list-tr:nth-child(even) { background: #FFF }
+.Explorer-list-tr:nth-child(odd) { background: #EEE }*/
+
+.Explorer-list-tr-selected {
+  background: #CCE8FF;
+  /*border: 1px solid #99D1FF;*/
+}
+
+.Explorer-list-td {
+  cursor:default;
+}
+
+.Explorer-list-td-name {
+	display: flex;
+  align-items: center;
+}
+
+.Explorer-statusBar {
+  border: 2mm ridge rgba(224, 224, 224, .6);
+  text-align: left;
+  padding-left: 5px;
+  /*width: 99%;*/
+}
+
+.Explorer-noFolder {
+  display: flex;
+	justify-content: center;
+  margin-top: 20px;
+  color: grey;
+}
+
+@media screen and (max-width: 800px) {
+  .Explorer-menu-button > span {
+    display: none;
+  }
+}

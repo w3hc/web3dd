@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+  /*height: 100%;*/
+}
+
+.App-header {
+  background-color: #3875ee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 10px 0px;
+}
+
+.App-button {
+  font-family: Arial, Helvetica, monospace;
+  font-size: 12px;
+  font-weight: bold;
+  padding:5px 25px;
+  margin: 5px;
+  border-radius: 10px 10px 10px 10px;
+  background: linear-gradient(#C5C5FF, #4d4df1, #C5C5FF);
+  color: #FFFFFF;
+  cursor:pointer;
+}
+
+.App-button:disabled {
+  background: #c0c0c0;
+}
