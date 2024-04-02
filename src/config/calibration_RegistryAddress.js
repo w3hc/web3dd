@@ -1,0 +1,1 @@
+export const filecoinCalibration_REGISTRY_ADDR = '0x57399e219E57866e8B106e6cBd8af3b36CB86420';
