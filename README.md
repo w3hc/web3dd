@@ -3,7 +3,7 @@
 A decentralized storage solution based on Blockchain and ipfs, for security, data preservation and online identification.
 
 ## Live demo
-web3dd.net
+https://disk.web3dd.net/ ou https://web3dd.on-fleek.app/
 
 
 ## Disk access 
@@ -56,13 +56,6 @@ export const REGISTRY_ADDR = '<registry_address_on_ganache>';
 
 
 ## Deploy
-
-### Sepolia Testnet
-
-Disk: 0x57399e219E57866e8B106e6cBd8af3b36CB86420
-DiskRegistry: 0x4Bc81D37d5EE89c4186aF81d438B0a9AF34BD5c6
-
-### Manual deploy
 
 - deploy disk contract
 - deploy registry contract
