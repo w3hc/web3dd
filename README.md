@@ -19,23 +19,10 @@ you can access your disc in several ways:
 npm i
 ```
 
-## Run
-
-```shell
-npm start
-```
-
-## Test contracts
-
-```shell
-npx hardhat test
-```
-
-
 ### Install for web disk
 
 You can install the explorer local and use a disk on blockchain. Just run, change nothing.
-The explorer use default configuration on network filecoin Calibration testnet.
+The explorer use default configuration on network sepolia testnet.
 **config/config.js**
 ```
 export const ETH_CHAINS = [sepolia];
@@ -54,6 +41,17 @@ export const NETWORK_ID_SYMBOL = "GETH";
 export const REGISTRY_ADDR = '<registry_address_on_ganache>';
 ```
 
+## Run
+
+```shell
+npm start
+```
+
+## Test contracts
+
+```shell
+npx hardhat test
+```
 
 ## Deploy
 
