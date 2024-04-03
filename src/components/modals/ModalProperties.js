@@ -28,7 +28,7 @@ const ModalProperties = ({ isPropertiesShowing, hideProperties, pathProperties, 
 					</div>
 				</div>
 				{(dataBinProperties !== "" || dataTextProperties !== "") && <div>
-					<button className="App-button" onClick={() => setToggleBinary(!toggleBinary)}>View data as UTF8</button>
+					<button className="App-button" onClick={() => setToggleBinary(!toggleBinary)}>{toggleBinary ? "View data as UTF8" : "View data as Binary"}</button>
 					<div className="modal_properties_preview">
 						{toggleBinary ? dataBinProperties : dataTextProperties}
 					</div>

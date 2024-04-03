@@ -38,9 +38,9 @@ You can install the explorer local and use a disk on blockchain. Just run, chang
 The explorer use default configuration on network filecoin Calibration testnet.
 **config/config.js**
 ```
-export const ETH_CHAINS = [filecoinCalibration];
-export const NETWORK_ID_SYMBOL = "tFIL";
-export const REGISTRY_ADDR = '0x57399e219E57866e8B106e6cBd8af3b36CB86420';
+export const ETH_CHAINS = [sepolia];
+export const NETWORK_ID_SYMBOL = "SEP";
+export const REGISTRY_ADDR = '0x4Bc81D37d5EE89c4186aF81d438B0a9AF34BD5c6';
 ```
 
 ### Install for local disk
@@ -57,10 +57,10 @@ export const REGISTRY_ADDR = '<registry_address_on_ganache>';
 
 ## Deploy
 
-### Filecoin Calibration Testnet
+### Sepolia Testnet
 
-Disk: 0x0717EFFC74974f5a63C58923CE7C9f29cA914C2a
-DiskRegistry: 0x57399e219E57866e8B106e6cBd8af3b36CB86420
+Disk: 0x57399e219E57866e8B106e6cBd8af3b36CB86420
+DiskRegistry: 0x4Bc81D37d5EE89c4186aF81d438B0a9AF34BD5c6
 
 ### Manual deploy
 

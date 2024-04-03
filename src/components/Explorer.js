@@ -247,7 +247,7 @@ const Explorer = () => {
 		//console.log("showPropertiesModal");
     const element = selectedElement.id.substr(3);
     const fileEntry = fileList[element];
-    pathPropertiesChange("/");
+    pathPropertiesChange(selectedPath);
     namePropertiesChange(fileEntry.name);
     const typeFile = fileEntry.content_type;
 		//console.log("content_type: ",typeFile);
@@ -255,7 +255,7 @@ const Explorer = () => {
     typePropertiesChange(contentType[typeFile]);
     datePropertiesChange((new Date((parseInt(fileEntry.creation_date._hex) * 1000))).toLocaleString());
     if (typeFile > 1) {
-      const dataFile = await diskClass.readFile("/" + fileEntry.name);
+      const dataFile = await diskClass.readFile(selectedPath === '/' ? "/" + fileEntry.name : selectedPath + "/" + fileEntry.name);
       //console.log("[showPropertiesModal] data Bin: ", dataFile);
       //console.log("[showPropertiesModal] data UTF: ", ethers.utils.toUtf8String(dataFile));
       dataTextPropertiesChange(ethers.utils.toUtf8String(dataFile));
