@@ -29,7 +29,6 @@
 
 .modal_body {
 	color: #000000;
-	/*background-color: #a0a0a0;*/
 	padding: 0px 10px 10px 10px;
 }
 
@@ -62,9 +61,7 @@
 }
 
 .modal_text_left {
-	/*flex: 1;*/
 	margin-right: 0px;
-
 }
 
 .modal_text_right {
@@ -96,7 +93,6 @@
 }
 
 .txt_loader {
-	/*mt-2 mb-1 mr-3 ml-3*/
 	margin-top: 0.5rem !important;
 	margin-bottom: 0.25rem !important;
 	margin-right: 1rem !important;
@@ -115,9 +111,7 @@
 	background-color: white;
 	position: relative;
 	margin: auto;
-	/*border-radius: 10px;*/
 	border: 1px solid black;
-	/*max-width: 500px;*/
 	min-width: 350px;
 	width: auto;
 	display: block;
@@ -125,12 +119,7 @@
 }
 
 .modal_header {
-	/*display: flex;
-	justify-content: space-between;
-	align-items: center;*/
 	color: #000000;
-	/*border-bottom: 0px;*/
-	/*padding: 5px 0px;*/
 }
 
 .modal_title {
@@ -176,7 +165,6 @@
 
 /* Modal Properties */
 .modal_properties_preview {
-	/*width: 200px;*/
 	max-width: 400px;
 	max-height: 200px;
 	margin: 0px 10px 10px 10px;
@@ -192,8 +180,6 @@
 .modal_upload_storage {
 	border: 1px solid #d5dae2;
 	display: block;
-	/*margin-top: 10px;
-	margin-bottom: 10px;*/
 	white-space: nowrap;
 }
 
@@ -211,9 +197,3 @@
 	margin-left: 30px;
 	margin-right: 5px;
 }
-
-/*
-[name=btnDownload] {
-	color: white;
-}
-*/

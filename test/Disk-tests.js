@@ -100,21 +100,44 @@ describe("**** Disk ****", function () {
 
     it("readFile text and binary", async function () {
       let content = fs.readFileSync(__dirname + "/robots.txt");
+      //console.log(content); // return <Buffer 63 6f 6e 73 74
       await Disk.createFile("/","test.txt", "text/utf8",0,Uint8Array.from(content));
-      let fileData = await Disk.readFile("/test.txt");
+      let fileData = await Disk.readFile("/test.txt"); // 0x232068747470733a2
+      //console.log(Buffer.from(fileData.substr(2) , "hex"));
       let dataRead = Buffer.from(fileData.substr(2), "hex");
       expect(dataRead.equals(Uint8Array.from(content))).to.equal(true);
 
       content = fs.readFileSync(__dirname + "/DiskRegistry-tests.zip");
+      //console.log(content); // return <Buffer 63 6f 6e 73 74
       await Disk.createFile("/","test_zip.bin", "application/binary",0,Uint8Array.from(content));
-      fileData = await Disk.readFile("/test_zip.bin");
+      fileData = await Disk.readFile("/test_zip.bin"); // 0x232068747470733a2
+      //console.log(Buffer.from(fileData.substr(2) , "hex"));
       dataRead = Buffer.from(fileData.substr(2), "hex");
       expect(dataRead.equals(Uint8Array.from(content))).to.equal(true);
     });
   });
 
-  describe("* Create files for hardhat tests *", function () {
-    console.log("* Create files for hardhat tests *");
+  describe("* Tests gas cost *", function () {
+    it("check gas cost", async function () {
+      let content = Buffer.alloc(4 * 1024,'a');
+      //console.log("content.length: ", Uint8Array.from(content).length);
+      await Disk.createFile("/","test_4k.txt", "application/binary",0,Uint8Array.from(content), { gasLimit: 30000000 });
+
+      // bug: 32000 = 31,199,576 / 16000 = 30,111,640 without { gasLimit: 30000000 }
+      /*
+      // 16K = 11818204
+      content = Buffer.alloc(16 * 1024,'a');
+      await Disk.createFile("/","test_16k.txt", "application/binary",0,Uint8Array.from(content), { gasLimit: 30000000 });
+      */
+
+      // 32K = 23448348
+      content = Buffer.alloc(32 * 1024,'a');
+      await Disk.createFile("/","test_32k.txt", "application/binary",0,Uint8Array.from(content), { gasLimit: 30000000 });
+    });
+  });
+
+  describe("* Create files for manuals Tests *", function () {
+    console.log("* Create files for manuals Tests *");
     let content = null;
     if (!fs.existsSync("test/test_4k.txt")) {
       content = Buffer.alloc(4 * 1024,'a');
@@ -132,6 +155,7 @@ describe("**** Disk ****", function () {
       content = Buffer.alloc(24 * 1024,'a');
       fs.writeFileSync("test/test_24k.txt", Uint8Array.from(content));
     }
+
     if (!fs.existsSync("test/test_32k.txt")) {
       content = Buffer.alloc(32 * 1024,'a');
       fs.writeFileSync("test/test_32k.txt", Uint8Array.from(content));
@@ -140,20 +164,9 @@ describe("**** Disk ****", function () {
       content = Buffer.alloc(48 * 1024,'a');
       fs.writeFileSync("test/test_48k.txt", Uint8Array.from(content));
     }
-    /*
     if (!fs.existsSync("test/test_64k.txt")) {
       content = Buffer.alloc(64 * 1024,'a');
       fs.writeFileSync("test/test_64k.txt", Uint8Array.from(content));
     }
-    */
-  });
-
-  describe("* Tests gas cost *", function () {
-    it("check gas cost", async function () {
-      let content = Buffer.alloc(4 * 1024,'a');
-      await Disk.createFile("/","test_4k.txt", "application/binary",0,Uint8Array.from(content), { gasLimit: 30000000 });
-      content = Buffer.alloc(32 * 1024,'a');
-      await Disk.createFile("/","test_32k.txt", "application/binary",0,Uint8Array.from(content), { gasLimit: 30000000 });
-    });
   });
 });

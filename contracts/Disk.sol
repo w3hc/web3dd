@@ -22,7 +22,7 @@ contract Disk is Ownable {
 	struct fileInfo {
 		bool isexist;
 		string name;
-		uint32 content_type; // 0 = unknown, 1 = dir, 2 = binary file, 3 = url
+		uint32 content_type; // 0 = unknown, 1 = dir, 2 = binary file, 3 = url [url file, 4 = ipfs file, 5 = url website]
 		uint256 creation_date;
 		string attributs; // user define attributs in json format
 		string[] content_list; // directory content list
@@ -37,9 +37,10 @@ contract Disk is Ownable {
 		string attributs;
 	}
 
+	//mapping of kekkac256("<path/file_name>") to struct fileInfo
 	mapping(bytes32 => fileInfo) public listDisk;
 
-	bytes32 public root;
+	bytes32 public root; // = keccak256(abi.encodePacked("/"));
 
 	event CreateDir(string path, string name);
 	event CreateFile(string pathName);
@@ -95,7 +96,7 @@ contract Disk is Ownable {
 	}
 
 	/**** internal functions ****/
-	/// @notice tests the presence of the character '/' in the string
+	/// @notice test the presence of the character '/' in the string
 	/// @param _name the string to check
 	/// @return bool return true if found, false otherwise
 	function _containsRoot(string memory _name) internal pure returns (bool) {
@@ -264,8 +265,21 @@ contract Disk is Ownable {
 		_diskInfo.attributs = _attributs;
 		_diskInfo.content_type = _content_type + 2;
 		_diskInfo.creation_date = block.timestamp;
+		//_diskInfo.data = _data;
+		/*
+		_diskInfo.data = _data; =>
+		let slot := _diskInfo.data.slot
+		sstore(slot, _data)
+		*/
 		listDisk[keccak256(abi.encodePacked(pathName))] = _diskInfo;
 		listDisk[keccak256(abi.encodePacked(pathName))].data = _data;
+		/*
+		keccak256(abi.encodePacked(pathName)) =>
+		mstore(ptr, pathName.slot)
+		let slot := keccak256(ptr, 0x20)
+		return(ptr, 0x20)
+		*/
+
 		// add to path
 		listDisk[keccak256(abi.encodePacked(_path))].content_list.push(_name);
 		emit CreateFile(pathName);

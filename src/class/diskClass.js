@@ -37,6 +37,7 @@ class diskClass {
 	}
 
 	checkVar() {
+		//if (!window.ethereum) return false;
 		if (this._diskContractAddress === "") {
 			console.error('[checkVar] Invalid Contract Address');
 			return false;
@@ -50,10 +51,13 @@ class diskClass {
 
 	/// @notice get disk contract owner.
 	async getOwner() {
+		//console.log('get disk contract owner ...');
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.owner();
+			//console.log('getOwner: ', result);
 			return result;
 		}
 		catch(error) {
@@ -64,10 +68,13 @@ class diskClass {
 
 	/// @notice get disk contract version.
 	async getVersion() {
+		//console.log('get disk contract version ...');
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.version();
+			//console.log('getVersion: ', result);
 			return result;
 		}
 		catch(error) {
@@ -78,10 +85,13 @@ class diskClass {
 
 	/// @notice get mutable status of disk.
 	async getImmutable() {
+		//console.log('get mutable status of disk ...');
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.isImmutable();
+			//console.log('getImmutable: ', result);
 			return result;
 		}
 		catch(error) {
@@ -94,6 +104,7 @@ class diskClass {
 	async getBlocSize() {
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.blocSize();
 			return parseInt(result);
@@ -106,10 +117,13 @@ class diskClass {
 
 	/// @notice test the existence of a directory.
 	async existDir(dirName) {
+		//console.log('tests the existence of a directory ...');
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.existDir(dirName);
+			//console.log('existDir: ', result);
 			return result;
 		}
 		catch(error) {
@@ -123,10 +137,13 @@ class diskClass {
 
 	/// @notice get the directory/file list of a directory with data.
 	async longListDir(dirName) {
+		//console.log('get the directory/file list of a directory with data ...');
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.longListDir(dirName);
+			//console.log('longListDir: ', result);
 			return result;
 		}
 		catch(error) {
@@ -137,17 +154,25 @@ class diskClass {
 
 	/// @notice create sub-directory in directory.
 	async createDir(path, name) {
+		//console.log('create sub-directory in directory ...');
 		if (!this.checkVar()) return false;
 		try {
+			//const gas = (3000000000 * 2) / 1000000000; //await getGasPrices();
+			//const fastGasPrice = Math.trunc(gas * 1000000000);
+			//console.log('fastGasPrice: ' + fastGasPrice);
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
-			const transaction = await contract.createDir(path, name);
+			const transaction = await contract.createDir(path, name); //, { gasPrice: fastGasPrice }
 			console.log('waiting transaction ...');
-			await this._provider.waitForTransaction(transaction.hash);
+			//console.log("transaction: ", transaction);
+			/*const waitTransaction =*/ await this._provider.waitForTransaction(transaction.hash);
+			//console.log("waitTransaction: ", waitTransaction);
 			const lastest = await this._provider.getBlock('latest');
+			//console.log("latest: ", lastest.number);
 			if(this._transactionConfirmation) await this.confirmTransaction(this._provider, lastest.number + 1, 1);
 			return true;
 
 		} catch (error) {
+			//loaderStop();
 			if (error.code === 4001 || error.code === "ACTION_REJECTED") {
 				console.log("Transaction denied by user");
 				return false;
@@ -159,10 +184,13 @@ class diskClass {
 
 	/// @notice test if file exist.
 	async existFile(fileName) {
+		//console.log('test if file exist: ',fileName);
 		if (!this.checkVar()) return null;
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.existFile(fileName);
+			//console.log('existFile: ', result);
 			return result;
 		}
 		catch(error) {
@@ -175,10 +203,12 @@ class diskClass {
 
 	/// @notice return the content of a file.
 	async readFile(fileName) {
+		//console.log('Read the content of a file ...');
 		if (!this.checkVar()) return null;
 		try {
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
 			const result = await contract.readFile(fileName);
+			//console.log('readFile: ', result);
 			return result;
 		}
 		catch(error) {
@@ -199,13 +229,20 @@ class diskClass {
 
 	/// @notice create a file.
 	async createFile(path, name, attributs, content_type, data) {
+		//console.log('create file in directory ...');
 		if (!this.checkVar()) return false;
 		try {
+			//const gas = (3000000000 * 2) / 1000000000; //await getGasPrices();
+			//const fastGasPrice = Math.trunc(gas * 1000000000);
+			//console.log('fastGasPrice: ' + fastGasPrice);
 			const contract = new ethers.Contract(this._diskContractAddress, diskAbi, this._signer);
-			const transaction = await contract.createFile(path, name, attributs, content_type, data);
+			const transaction = await contract.createFile(path, name, attributs, content_type, data /*, { gasLimit: 30000000 }*/); //, { gasPrice: fastGasPrice }
 			console.log('waiting transaction ...');
-			await this._provider.waitForTransaction(transaction.hash);
+			//console.log("transaction: ", transaction);
+			/*const waitTransaction =*/ await this._provider.waitForTransaction(transaction.hash);
+			//console.log("waitTransaction: ", waitTransaction);
 			const lastest = await this._provider.getBlock('latest');
+			//console.log("latest: ", lastest.number);
 			if(this._transactionConfirmation) await this.confirmTransaction(this._provider, lastest.number + 1, 1);
 			return true;
 
@@ -221,6 +258,7 @@ class diskClass {
 
 	//**** wait confirm transaction ****
 	async confirmTransaction(provider, blockNumber, blocksToWait) {
+		//console.log('waiting confirmation ...');
 		let oldNumber = blockNumber;
 		try {
 			for (let i = 0; i < 10; i++) {

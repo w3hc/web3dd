@@ -6,6 +6,8 @@ pragma solidity 0.8.25;
 /// @notice registry for Disk
 
 import "./Ownable.sol";
+// TODO: pausable for diskCreate
+//https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/Pausable.sol
 
 contract DiskRegistry is Ownable {
 
@@ -19,17 +21,21 @@ contract DiskRegistry is Ownable {
 	// List disk address
 	address[] diskList;
 
+	// Bytecode of disk for deploy
+	//bytes public diskBytecode;
+
 	event CreateDisk(address owner, address disk);
 
 	constructor() {
 	}
 
 	/// @notice create disk and add it to registry.
+	// TODO : noReentrancy() ?
 	function diskCreate() public {
 		require(!diskExist(msg.sender), "You already have a disk");
 		require(diskContractAddress != address(0), "No disk contract address");
 		address diskAddress = _clone(); //_deploy(); //deployBytecode();
-		(bool success, /*bytes memory data*/) = diskAddress.call(abi.encodeWithSignature("init(address)", msg.sender));
+		(bool success, /*bytes memory data*/) = diskAddress.call(abi.encodeWithSignature("init(address)",msg.sender));
 		require(success, "Disk initialisation failed");
 		listDisk[msg.sender] = diskAddress;
 		diskCounter++;
@@ -78,6 +84,26 @@ contract DiskRegistry is Ownable {
 		listDisk[_owner] = address(0);
 	}
 
+	/*
+	/// @notice save the bytecode of contract disk for deploy.
+	/// @param _bytecode the bytecode in bytes of the contract disk
+	function setDiskBytecode(bytes memory _bytecode) public onlyOwner {
+		diskBytecode = abi.encodePacked(hex"63",uint32(_bytecode.length),hex"80_60_0E_60_00_39_60_00_F3",_bytecode);
+	}
+
+	/// @notice save the bytecode of contract disk for deploy.
+	/// @param _bytecodeString the bytecode in string of the contract disk
+	function setDiskBytecodeString(string memory _bytecodeString) public onlyOwner {
+		setDiskBytecode(bytes(_bytecodeString));
+	}
+
+	/// @notice save the bytecode of contract disk for deploy.
+	/// @param _diskContractAddress the address of the contract disk
+	function setDiskBytecodeByAddress(address _diskContractAddress) public onlyOwner {
+		setDiskBytecode(_diskContractAddress.code);
+	}
+	*/
+
 	/// @notice save the contract address disk for deploy.
 	/// @param _diskContractAddress the address of the contract disk
 	function setDiskContractAddress(address _diskContractAddress) public onlyOwner {
@@ -93,4 +119,28 @@ contract DiskRegistry is Ownable {
 		}
 		require(pointer != address(0), "Failed on deploy");
 	}
+
+	/*
+	/// @notice deploy the bytecode of disk.
+	function _deploy() internal returns (address pointer) {
+		require(diskBytecode.length > 0, "No Bytecode");
+		bytes memory code = diskBytecode;
+		assembly {
+			pointer := create(0, add(code, 32), mload(code))
+		}
+		require(pointer != address(0), "Failed on deploy");
+	}
+
+	function deployBytecode() public returns (address) {
+		address retval;
+		require(diskBytecode.length > 0, "No Bytecode");
+		bytes memory bytecode = diskBytecode;
+		assembly{
+			mstore(0x0, bytecode)
+			retval := create(0,0xa0, mload(bytecode))
+		}
+		require(retval != address(0), "Failed on deploy");
+		return retval;
+	}
+	*/
 }

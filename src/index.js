@@ -15,3 +15,13 @@ root.render(
     </Web3Provider>
   </React.StrictMode>
 );
+
+/*
+root.render(
+  <React.StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>
+);
+*/

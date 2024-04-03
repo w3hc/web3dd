@@ -3,7 +3,7 @@
 A decentralized storage solution based on Blockchain and ipfs, for security, data preservation and online identification.
 
 ## Live demo
-[web3dd.net](https://dobc.netlify.app/)
+web3dd.net
 
 
 ## Disk access 
@@ -54,12 +54,12 @@ export const NETWORK_ID_SYMBOL = "GETH";
 export const REGISTRY_ADDR = '<registry_address_on_ganache>';
 ```
 
+
 ## Deploy
 
 ### Filecoin Calibration Testnet
 
 Disk: 0x0717EFFC74974f5a63C58923CE7C9f29cA914C2a
-
 DiskRegistry: 0x57399e219E57866e8B106e6cBd8af3b36CB86420
 
 ### Manual deploy

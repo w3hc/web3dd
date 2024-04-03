@@ -29,14 +29,17 @@ class DiskRegistryClass {
 
 	/// @notice create disk and add it to registry.
 	async diskCreate() {
+		//console.log('Create contract disk for this owner ...');
 		if (this._signer === null) {
 			console.error('[diskCreate] Invalid signer');
 			return null;
 		}
 
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._registryContractAddress, diskRegistryAbi, this._signer);
 			const transaction = await contract.diskCreate();
+			//console.log('diskCreate: ', transaction);
 			return transaction;
 		}
 		catch(error) {
@@ -51,17 +54,22 @@ class DiskRegistryClass {
 
 	/// @notice get contract disk address for this owner
 	async getDisk(connectedUserAddress) {
+		//console.log('get contract disk address for this owner ...');
 		if (this._registryContractAddress === "") {
 			console.error('[getDisk] Invalid Contract Address');
 			return null;
 		}
+
 		if (this._signer === null) {
 			console.error('[getDisk] Invalid signer');
 			return null;
 		}
+
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._registryContractAddress, diskRegistryAbi, this._signer);
 			const result = await contract.getDisk(connectedUserAddress);
+			//console.log('getDisk: ', result);
 			return result;
 		}
 		catch(error) {
@@ -72,17 +80,22 @@ class DiskRegistryClass {
 
 	/// @notice check if owner have disk
 	async diskExist(connectedUserAddress) {
+		//console.log('Check if disk exist for this owner ...');
 		if (this._registryContractAddress === "") {
 			console.error('[diskExist] Invalid Contract Address');
 			return null;
 		}
+
 		if (this._signer === null) {
 			console.error('[diskExist] Invalid signer');
 			return null;
 		}
+
 		try {
+			//const signer = this._provider.getSigner();
 			const contract = new ethers.Contract(this._registryContractAddress, diskRegistryAbi, this._signer);
 			const result = await contract.diskExist(connectedUserAddress);
+			//console.log('diskExist: ', result);
 			return result;
 		}
 		catch(error) {
