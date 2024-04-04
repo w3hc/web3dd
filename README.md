@@ -1,17 +1,19 @@
 # Web3 Decentralized Disk
 
-A decentralized storage solution based on Blockchain and ipfs, for security, data preservation and online identification.
+A classic file explorer to manage your files and directories in a safe and decentralized fashion.
 
 ## Live demo
-https://disk.web3dd.net/ ou https://web3dd.on-fleek.app/
 
+We're hosted by Fleek: 
 
-## Disk access 
+https://disk.web3dd.net/ or https://web3dd.on-fleek.app/
 
-you can access your disc in several ways:
-- with the UX on web (see live demo)
-- from another contract
+## Disk access
 
+You can access your disk in several ways:
+
+- Web app ([view UI](https://disk.web3dd.net/))
+- From an on-chain contract
 
 ## Install
 
@@ -21,20 +23,23 @@ npm i
 
 ### Install for web disk
 
-You can install the explorer local and use a disk on blockchain. Just run, change nothing.
-The explorer use default configuration on network sepolia testnet.
-**config/config.js**
+You can install the explorer locally and use the on-chain disk. Just run it (`npm start`) , you don't need to change anything.
+
+The file explorer default network is Sepolia Testnet.
+
+### config/config.js
+
 ```
 export const ETH_CHAINS = [sepolia];
 export const NETWORK_ID_SYMBOL = "SEP";
 export const REGISTRY_ADDR = '0x4Bc81D37d5EE89c4186aF81d438B0a9AF34BD5c6';
 ```
 
-### Install for local disk
+### Local network setup
 
-Deploy the contracts on Ganache (see deploy for more info)
+Deploy the contracts on Ganache (read the [deploy](https://github.com/w3hc/web3dd?tab=readme-ov-file#deploy) section to learn more).
 
-Change network to Ganache in **config/config.js**
+Switch to Ganache in **config/config.js**
 ```
 export const ETH_CHAINS = [localhost];
 export const NETWORK_ID_SYMBOL = "GETH";
@@ -55,11 +60,11 @@ npx hardhat test
 
 ## Deploy
 
-- deploy disk contract
-- deploy registry contract
-- set the address of disk contract to the registry adddress with setDiskContractAddress(<disk_address>)
+- deploy the disk contract
+- deploy the registry contract
+- set the address of the disk contract in the registry (`setDiskContractAddress(<disk_address>)`)
 
-| :warning: Don't forget to copy your registry address in the config/config.js ! |
+| :warning: Don't forget to copy your registry address in the `config/config.js` file! |
 | --- |
 
 
