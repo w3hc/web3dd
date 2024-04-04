@@ -85,15 +85,15 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 								<input type="radio" id="onipfs" name="storage" value="1"/>
 								<label htmlFor="onipfs"> On IPFS (with Pinata)</label>
 								<div>
-									<div><span style={{marginLeft: "30px"}}>API key:</span>
+									<div><span style={{marginLeft: "30px"}}>Pinata key:</span>
 										<div><input className="modal_upload_input_key"
 											id="inputApiKey"
-											placeholder="Your Pinata API key"
+											placeholder="Your Pinata key"
 											value={ApiKey}
 											onChange={(e) => { setApiKey(e.target.value); }}
 										/></div>
 									</div>
-									<div><span style={{marginLeft: "30px"}}>Secret key:</span>
+									<div><span style={{marginLeft: "30px"}}>Pinata secret key:</span>
 										<div><input className="modal_upload_input_key"
 											id="inputSecretKey"
 											placeholder="Your Pinata secret key"
@@ -102,7 +102,7 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 										/></div>
 									</div>
 								</div>
-								
+								{/*
 								<div style={{marginBottom: "20px", opacity: "0.4", marginTop: "15px"}}>
 								<input type="radio" id="onipfs" name="storage" value="1" disabled/>
 								<label htmlFor="onipfs"> On IPFS (with Fleek)</label>
@@ -118,13 +118,14 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 									<div><span style={{marginLeft: "30px"}}>Project ID:</span>
 										<div><input className="modal_upload_input_key"
 											id="inputSecretKey"
-											placeholder="Your Fleek project ID (e.g. cluihwmof0000l9083vlukmc2)"
+											placeholder="Your Fleek project ID"
 											value={SecretApiKey}
 											onChange={(e) => { setSecretApiKey(e.target.value); }}
 										/></div>
 									</div>
 								</div>
 								</div>
+								*/}
 							</div>
 						</div>
 					</div>

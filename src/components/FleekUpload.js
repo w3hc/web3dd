@@ -1,33 +1,42 @@
-import { FleekSdk, PersonalAccessTokenService } from '@fleekxyz/sdk';
+import fleek from '@fleekhq/fleek-storage-js';
 
 /// @notice Upload file to ipfs with Fleek
 /// @param fileUpload pointer to file
 /// @param fileName name of file
-/// @param FleekAPIkey Fleek key
-/// @param FleekAPIsecret Fleek secret key
+/// @param APIkey Fleek PAT
+/// @param APIsecret Fleek projectId
 /// @return CID of file on ipfs, null on error
 export const FleekUploadToIPFS = async (fileUpload, fileName, APIkey, APIsecret) => {
 
   try {
-    const patService = new PersonalAccessTokenService({
-      personalAccessToken: APIkey,
-      projectId: APIsecret
-    })
-
-    const fleekSdk = new FleekSdk({ accessTokenService: patService });
-
-    const uploadToIPFS = async (filename, filedata) => {
-      const result = await fleekSdk.ipfs().add({
-        path: filename,
-        content: filedata,
-      })
-      console.log('result', result);
-      return result;
-    }
     console.log("fileUpload:", fileUpload);
-    //var blob = new Blob([ethers.utils.toUtf8String(dataFile)]);
-    const resFile = await uploadToIPFS(fileName, fileUpload);
-    console.log("resFile:", resFile);
+
+    let filedata = await new Promise((resolve) => {
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => resolve(fileReader.result);
+      fileReader.readAsArrayBuffer(fileUpload);
+    });
+
+    console.log("filedata:", filedata);
+    if (filedata.byteLength === 0) {
+      console.error("Error Empty content !");
+      return null;
+    }
+
+    const input = {
+      apiKey: APIkey,
+      apiSecret: APIsecret,
+      key: fileName, // key: `my-folder/my-file-name`, -> key: 'my-file-key',
+      data: filedata,
+    };
+  
+    const result = await fleek.upload(input);
+    //The Access Key Id you provided does not exist in our records.
+
+    console.log("result:", result);
+    //return result;
+    return null;
+
   } catch (error) {
     console.error("Error sending File to IPFS: ", error.message);
     return null;

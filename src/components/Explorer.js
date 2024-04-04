@@ -7,6 +7,7 @@ import { useAccount, useSigner, /*useDisconnect/*, useProvider*/ } from 'wagmi';
 
 import { PinataUploadToIPFS } from "./PinataUpload";
 //import { FilecoinUploadToIPFS } from "./FilecoinUpload";
+//import { FleekUploadToIPFS } from "./FleekUpload";
 
 import { NETWORK_ID_SYMBOL, REGISTRY_ADDR } from '../config/config'
 import { truncAddress, amountCent/*, sleep*/ } from './Tools';
@@ -474,9 +475,9 @@ const Explorer = () => {
         loaderStart("Sending file to ipfs, Please wait ...");
         const ipfsCID = await PinataUploadToIPFS(fileUploadPointer, address, name, apiKey, secretKey);
         //const ipfsCID = await FilecoinUploadToIPFS(fileUploadPointer, signer);
-        //const ipfsCID = await FilecoinUploadToIPFS(fileUploadPointer, secretKey);
+        //const ipfsCID = await FleekUploadToIPFS(fileUploadPointer, name, apiKey, secretKey);
         loaderStop();
-        if (ipfsCID === null) {
+        if (ipfsCID === null || ipfsCID === undefined) {
           showInfoModal("ERROR", "ERROR", 'Error sending file to IPFS (check your key and password)');
           return;
         }
