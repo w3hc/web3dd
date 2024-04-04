@@ -21,7 +21,7 @@ const Homepage = () => {
     <div className="App Homepage">
       <header className="App-header Homepage-header">
         <div className="Homepage-header-title">Web3 Decentralized Disk</div>
-        <div className="Homepage-header-subtitle">The most easy way to store any files on web3</div>
+        <div className="Homepage-header-subtitle">The easiest way to store any files on Web3</div>
       </header>
 
       <div className="Homepage-detail">
@@ -52,7 +52,7 @@ const Homepage = () => {
             <div className="Homepage-detail-text">
               - Store for ever.<br/><br/>
               - Never lose your data.<br/><br/>
-              - Protect about the ravages a hacker can make by encrypting your data.<br/><br/>
+              - Protect against attacks.<br/><br/>
               - Nobody can modify or delete your data.
             </div>
           </div>
@@ -66,9 +66,9 @@ const Homepage = () => {
             <div className="Homepage-detail-title">EASY TO USE</div>
             <div className="Homepage-detail-text">
               - Use it like a hard disk<br/><br/>
-              - Organise your datas by creating folders.<br/><br/>
-              - Upload any file.<br/><br/>
-              - Create links to existing ipfs files.
+              - Organise your files by creating folders.<br/><br/>
+              - Upload any type of files.<br/><br/>
+              - Create links to existing files stored with IPFS.
             </div>
           </div>
         </div>
