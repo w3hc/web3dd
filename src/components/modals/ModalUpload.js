@@ -88,6 +88,7 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 									<div><span style={{marginLeft: "30px"}}>Pinata key:</span>
 										<div><input className="modal_upload_input_key"
 											id="inputApiKey"
+											type="password"
 											placeholder="Your Pinata key"
 											value={ApiKey}
 											onChange={(e) => { setApiKey(e.target.value); }}
@@ -96,6 +97,7 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 									<div><span style={{marginLeft: "30px"}}>Pinata secret key:</span>
 										<div><input className="modal_upload_input_key"
 											id="inputSecretKey"
+											type="password"
 											placeholder="Your Pinata secret key"
 											value={SecretApiKey}
 											onChange={(e) => { setSecretApiKey(e.target.value); }}
