@@ -74,21 +74,21 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 							<div className="modal_text_left">Storage:</div>
 						</div>
 						<div className="modal_text modal_upload_storage">
-							<div style={{marginBottom: "5px"}}>
+							<div style={{marginBottom: "5px", marginTop: "10px"}}>
 								<input type="radio" id="onchain" name="storage" value="0" defaultChecked="true"/>
-								<label className={(fileSize <= maxBlocSize) ? "" : "modal_upload_label_disabled"} htmlFor="onchain"> On blockchain</label>
+								<label className={(fileSize <= maxBlocSize) ? "" : "modal_upload_label_disabled"} htmlFor="onchain"> On the blockchain</label>
 								{/*<div className={(fileSize < maxBlocSize) ? "" : "modal_upload_div_none"}>
 									<span style={{marginLeft: "30px"}}>Cost</span>
 								</div>*/}
 							</div>
-							<div style={{marginBottom: "5px"}}>
+							<div style={{marginBottom: "5px", marginTop: "15px"}}>
 								<input type="radio" id="onipfs" name="storage" value="1"/>
-								<label htmlFor="onipfs"> On ipfs (with Pinata)</label>
+								<label htmlFor="onipfs"> On IPFS (with Pinata)</label>
 								<div>
-									<div><span style={{marginLeft: "30px"}}>Api key:</span>
+									<div><span style={{marginLeft: "30px"}}>API key:</span>
 										<div><input className="modal_upload_input_key"
 											id="inputApiKey"
-											placeholder="Your Pinata api key"
+											placeholder="Your Pinata API key"
 											value={ApiKey}
 											onChange={(e) => { setApiKey(e.target.value); }}
 										/></div>
@@ -101,6 +101,29 @@ const ModalUpload = ({ isUploadShowing, cancelFunc, validFunc, pathUpload, maxBl
 											onChange={(e) => { setSecretApiKey(e.target.value); }}
 										/></div>
 									</div>
+								</div>
+								
+								<div style={{marginBottom: "20px", opacity: "0.4", marginTop: "15px"}}>
+								<input type="radio" id="onipfs" name="storage" value="1" disabled/>
+								<label htmlFor="onipfs"> On IPFS (with Fleek)</label>
+								<div>
+									<div><span style={{marginLeft: "30px"}}>PAT:</span>
+										<div><input className="modal_upload_input_key"
+											id="inputApiKey"
+											placeholder="Your Fleek Personal Access Token"
+											value={ApiKey}
+											onChange={(e) => { setApiKey(e.target.value); }}
+										/></div>
+									</div>
+									<div><span style={{marginLeft: "30px"}}>Project ID:</span>
+										<div><input className="modal_upload_input_key"
+											id="inputSecretKey"
+											placeholder="Your Fleek project ID (e.g. cluihwmof0000l9083vlukmc2)"
+											value={SecretApiKey}
+											onChange={(e) => { setSecretApiKey(e.target.value); }}
+										/></div>
+									</div>
+								</div>
 								</div>
 							</div>
 						</div>
